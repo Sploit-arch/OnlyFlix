@@ -44,9 +44,7 @@ function details(x){state.active=x;$('detail-title').textContent=x.title;$('deta
    const frame=document.createElement('iframe');
    frame.src=url;
    frame.title=x.title+' — '+state.provider;
-   // Sandbox the third-party player: scripts and playback remain enabled,
-   // but popups and top-level navigation are deliberately NOT permitted.
-   frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-presentation');
+   // VidAPI requires an unsandboxed iframe to initialize its player.
    frame.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';
    frame.allowFullscreen=true;
    frame.referrerPolicy='strict-origin-when-cross-origin';
