@@ -1,5 +1,7 @@
 (() => {
 'use strict';
+// Defense in depth: stop unexpected pop-up windows opened by the OnlyFlix page.
+window.open=function(){return null};
 const cfg=window.ONLYFLIX_CONFIG||{},API=(cfg.vidApiBase||'https://vidapi.ru').replace(/\/$/,''),TMDB='https://api.themoviedb.org/3',IMG='https://image.tmdb.org/t/p/';
 const $=id=>document.getElementById(id),state={view:'home',page:1,latest:[],tv:[],catalog:[],active:null,hero:null,watchlist:load('onlyflix_watchlist',[]),pref:localStorage.getItem('onlyflix_playback_preference')||'auto',provider:localStorage.getItem('onlyflix_provider')||'VidAPI',key:(cfg.tmdbApiKey||'').trim(),searchToken:0,loading:false};
 function load(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}}function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').classList.remove('show'),2400)}function status(t='',err=false){$('status').replaceChildren();$('status').className='status'+(err?' error':'');if(t){if(!err){const i=document.createElement('i');$('status').append(i)}$('status').append(document.createTextNode(t))}}
@@ -39,7 +41,17 @@ function details(x){state.active=x;$('detail-title').textContent=x.title;$('deta
    if(!url){providerMessage.textContent='This source needs a TMDB ID or is unavailable.';$('player-message').textContent='Choose another provider or check the title metadata.';return}
    if(state.provider==='VidAPI' && subtitleSelect.value){url+=(url.includes('?')?'&':'?')+'ds_lang='+encodeURIComponent(subtitleSelect.value)}
    stage.replaceChildren();
-   const frame=document.createElement('iframe');frame.src=url;frame.title=x.title+' — '+state.provider;frame.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';frame.style.cssText='display:block;width:100%;height:100%;min-height:360px;border:0';stage.append(frame);
+   const frame=document.createElement('iframe');
+   frame.src=url;
+   frame.title=x.title+' — '+state.provider;
+   // Sandbox the third-party player: scripts and playback remain enabled,
+   // but popups and top-level navigation are deliberately NOT permitted.
+   frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-presentation');
+   frame.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';
+   frame.allowFullscreen=true;
+   frame.referrerPolicy='strict-origin-when-cross-origin';
+   frame.style.cssText='display:block;width:100%;height:100%;min-height:360px;border:0';
+   stage.append(frame);
    if(state.provider==='VidAPI'){
      providerMessage.textContent=subtitleSelect.value?'Requested subtitle language: '+(subtitleSelect.options[subtitleSelect.selectedIndex]?.textContent||subtitleSelect.value)+'. Availability depends on the provider’s subtitle catalogue.':'Subtitle language: automatic/provider default.';
      $('player-message').textContent='VidAPI subtitle language is requested through its automatic subtitle search. If no matching track is available, use the player’s subtitle controls or try another language.';
