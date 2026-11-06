@@ -13,15 +13,15 @@ function details(x){state.active=x;$('detail-title').textContent=x.title;$('deta
  document.body.style.overflow='hidden';
  const stage=$('player-stage');
  let toolbar=document.getElementById('provider-toolbar');
- if(!toolbar){toolbar=document.createElement('div');toolbar.id='provider-toolbar';toolbar.style.cssText='display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 0;color:#dcecff;';stage.parentNode.insertBefore(toolbar,stage)}
+ if(!toolbar){toolbar=document.createElement('div');toolbar.id='provider-toolbar';toolbar.style.cssText='display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 0;color:#eeeeee;';stage.parentNode.insertBefore(toolbar,stage)}
  toolbar.replaceChildren();
- const styleControl=el=>{el.style.cssText='background:#10223d;color:#fff;border:1px solid #318cff;border-radius:8px;padding:10px;min-width:130px'};
+ const styleControl=el=>{el.style.cssText='background:#242424;color:#fff;border:1px solid #e50914;border-radius:8px;padding:10px;min-width:130px'};
  const label=document.createElement('label');label.textContent='Playback source';label.htmlFor='provider-select';label.style.cssText='font-size:14px;font-weight:600';
  const select=document.createElement('select');select.id='provider-select';select.setAttribute('aria-label','Choose playback provider');styleControl(select);
  const providers=['VidAPI','VidRock','VidSpark','VidRift'];if(!providers.includes(state.provider))state.provider='VidAPI';
  providers.forEach(name=>{const option=document.createElement('option');option.value=name;option.textContent=name;select.append(option)});select.value=state.provider;
  const seasonLabel=document.createElement('label');seasonLabel.textContent='Season';
- const seasonInput=document.createElement('input');seasonInput.type='number';seasonInput.min='1';seasonInput.max='99';seasonInput.value='1';seasonInput.setAttribute('aria-label','Season number');seasonInput.style.cssText='width:65px;background:#10223d;color:#fff;border:1px solid #318cff;border-radius:8px;padding:9px';
+ const seasonInput=document.createElement('input');seasonInput.type='number';seasonInput.min='1';seasonInput.max='99';seasonInput.value='1';seasonInput.setAttribute('aria-label','Season number');seasonInput.style.cssText='width:65px;background:#242424;color:#fff;border:1px solid #e50914;border-radius:8px;padding:9px';
  const episodeLabel=document.createElement('label');episodeLabel.textContent='Episode';
  const episodeInput=document.createElement('input');episodeInput.type='number';episodeInput.min='1';episodeInput.max='999';episodeInput.value='1';episodeInput.setAttribute('aria-label','Episode number');episodeInput.style.cssText=seasonInput.style.cssText;
  [seasonLabel,seasonInput,episodeLabel,episodeInput].forEach(el=>el.hidden=x.type!=='tv');
@@ -30,8 +30,8 @@ function details(x){state.active=x;$('detail-title').textContent=x.title;$('deta
  const languages=[['','Automatic / provider default'],['en','English'],['es','Spanish'],['fr','French'],['de','German'],['it','Italian'],['pt','Portuguese'],['pt-br','Portuguese (Brazil)'],['nl','Dutch'],['pl','Polish'],['ru','Russian'],['uk','Ukrainian'],['tr','Turkish'],['ar','Arabic'],['hi','Hindi'],['ja','Japanese'],['ko','Korean'],['zh','Chinese'],['sv','Swedish'],['no','Norwegian'],['da','Danish'],['fi','Finnish'],['cs','Czech'],['el','Greek'],['he','Hebrew'],['id','Indonesian'],['th','Thai'],['vi','Vietnamese']];
  languages.forEach(([code,name])=>{const option=document.createElement('option');option.value=code;option.textContent=name;subtitleSelect.append(option)});
  try{subtitleSelect.value=localStorage.getItem('onlyflix_subtitle_language')||''}catch{subtitleSelect.value=''}
- const switchButton=document.createElement('button');switchButton.type='button';switchButton.textContent='Load player';switchButton.style.cssText='background:#1677ff;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:600;cursor:pointer';
- const providerMessage=document.createElement('span');providerMessage.style.cssText='font-size:12px;color:#a9c7ee;flex-basis:100%;';
+ const switchButton=document.createElement('button');switchButton.type='button';switchButton.textContent='Load player';switchButton.style.cssText='background:#e50914;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:600;cursor:pointer';
+ const providerMessage=document.createElement('span');providerMessage.style.cssText='font-size:12px;color:#ffb3b7;flex-basis:100%;';
  toolbar.append(label,select,seasonLabel,seasonInput,episodeLabel,episodeInput,subtitleLabel,subtitleSelect,switchButton,providerMessage);
  function loadSelectedProvider(){
    state.provider=select.value;try{localStorage.setItem('onlyflix_provider',state.provider);localStorage.setItem('onlyflix_subtitle_language',subtitleSelect.value)}catch{}
