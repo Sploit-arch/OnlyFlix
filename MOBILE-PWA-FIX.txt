@@ -1,0 +1,11 @@
+OnlyFlix Mobile/PWA layout repair
+
+Changes:
+- Reworked the mobile header into a compact logo/search row with navigation below.
+- Added iPhone safe-area handling and removed the translucent status-bar overlap.
+- Prevented horizontal overflow on narrow screens.
+- Adjusted mobile poster rows and catalogue grids.
+- Made the playback modal fit the full phone viewport, with safe-area-aware close controls and responsive provider controls.
+- Bumped the service-worker cache version so the updated shell replaces the previous cached layout.
+
+Deploy all files from this folder to Cloudflare Pages. On iPhone, fully close the installed OnlyFlix app and reopen it after deployment. If it still shows the old layout, remove the Home Screen icon, clear Safari website data for the site, then Add to Home Screen again.

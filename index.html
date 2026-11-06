@@ -1,14 +1,14 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#141414">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#141414">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="OnlyFlix">
 <meta name="application-name" content="OnlyFlix">
 <meta name="format-detection" content="telephone=no">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon-512.png"><meta name="description" content="OnlyFlix — discover your next movie night."><title>OnlyFlix by ItsSploited</title><link rel="icon" href="./assets/onlyflix-logo.png"><link rel="stylesheet" href="./styles.css"><style>
+<link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon-512.png"><meta name="description" content="OnlyFlix — discover your next movie night."><title>OnlyFlix — Movie Hub</title><link rel="icon" href="./assets/onlyflix-mark.svg"><link rel="stylesheet" href="./styles.css"><style>
 /* Keep the logo at its natural aspect ratio; do not stretch it. */
 .topbar .brand.brand-image.brand-lockup{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:0;width:clamp(145px,17vw,205px);height:76px;flex:0 0 auto;letter-spacing:0;white-space:nowrap;padding:0;overflow:visible;}
 .topbar .brand-image img{display:block;width:100%;height:auto;max-height:70px;object-fit:contain;object-position:left bottom;}
@@ -118,7 +118,164 @@ body{min-height:100vh;min-height:100dvh;padding-bottom:env(safe-area-inset-botto
 .install-help p{margin:7px 0 0;font-size:11px;line-height:1.65;color:#c9c9c9}
 .install-help p b{color:#fff}
 @media(display-mode:standalone){.topbar{scroll-margin-top:env(safe-area-inset-top)}}
-</style></head><body><header class="topbar"><a class="brand brand-image brand-lockup" href="#" aria-label="OnlyFlix — A project by ItsSploited"><img src="./assets/onlyflix-logo.png" alt="OnlyFlix"></a><nav><button class="nav active" data-view="home">Home</button><button class="nav" data-view="movies">Movies</button><button class="nav" data-view="tv">TV Shows</button><button class="nav" data-view="watchlist">My List <small id="list-count">0</small></button></nav><div class="actions"><form id="search-form"><span>⌕</span><input id="search" placeholder="Search titles…" aria-label="Search titles"><button id="clear" type="button" hidden>×</button></form><button id="prefs" class="avatar">OF</button></div></header><main><section class="hero"><div id="hero-image" class="hero-image"></div><div class="hero-shade"></div><div class="hero-content"><div class="eyebrow">✦ &nbsp; YOUR NEXT FAVORITE</div><p class="kicker">ONLYFLIX ORIGINAL DISCOVERY</p><h1 id="hero-title">Find your<br><em>next obsession.</em></h1><p id="hero-desc">Explore movies and series, build your list, and settle in for something great.</p><div id="hero-meta" class="meta"></div><div class="buttons"><button id="hero-play" class="primary">▶ &nbsp; Watch now</button><button id="hero-info" class="secondary">ⓘ &nbsp; More info</button></div></div><div class="hero-bottom">01 <span></span> A WORLD OF STORIES</div></section><div class="content"><div id="status" class="status"><i></i> Connecting to live catalogue…</div><section id="search-section" hidden><div class="section-head"><div><small>FIND YOUR TITLE</small><h2 id="search-heading">Search results</h2></div><label id="search-count"></label></div><div id="search-results" class="grid"></div></section><div id="home-view"><section class="shelf"><div class="section-head"><div><small>PICKED FOR YOU</small><h2>Trending discoveries <b>✦</b></h2></div></div><div id="trending" class="row"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></section><section class="shelf"><div class="section-head"><div><small>FRESHLY ADDED</small><h2>Latest on OnlyFlix</h2></div></div><div id="latest" class="row"></div></section><section class="shelf"><div class="section-head"><div><small>KEEP EXPLORING</small><h2>Series to get lost in</h2></div></div><div id="tv-row" class="row"></div></section></div><section id="catalog-view" hidden><div class="section-head"><div><small>THE COLLECTION</small><h2 id="catalog-title">Movies</h2></div><label id="catalog-count"></label></div><div id="catalog-grid" class="grid"></div><div class="load"><button id="load-more" class="secondary">Load more titles</button></div></section><section id="list-view" hidden><div class="section-head"><div><small>SAVED FOR LATER</small><h2>My List</h2></div></div><div id="list-grid" class="grid"></div><p id="empty-list" class="empty">Your list is waiting. Add titles with the ＋ button on any poster.</p></section></div>
+</style>
+<style id="onlyflix-mobile-pwa-repair">
+/* OnlyFlix mobile/PWA layout repair */
+html, body {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+}
+body { min-height: 100vh; min-height: 100dvh; }
+img, video, iframe { max-width: 100%; }
+@media (max-width: 760px) {
+  .topbar {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    position: sticky !important;
+    top: 0 !important;
+    display: flex !important;
+    flex-flow: row wrap !important;
+    align-items: center !important;
+    gap: 8px 12px !important;
+    padding: calc(9px + env(safe-area-inset-top, 0px)) 14px 0 !important;
+  }
+  .topbar .brand.brand-image.brand-lockup {
+    width: 126px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    flex: 0 0 126px !important;
+    align-self: auto !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+  }
+  .topbar .brand-image img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 48px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    align-self: center !important;
+  }
+  .topbar .brand-credit { display: none !important; }
+  .topbar .actions {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+    margin-left: auto !important;
+    gap: 7px !important;
+  }
+  #search-form {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 38px !important;
+    padding: 0 8px !important;
+  }
+  #search-form input { min-width: 0 !important; font-size: 12px !important; }
+  .avatar { flex: 0 0 36px !important; width: 36px !important; height: 36px !important; }
+  .topbar nav {
+    order: 3 !important;
+    flex: 0 0 calc(100% + 28px) !important;
+    width: calc(100% + 28px) !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    margin: 0 -14px !important;
+    padding: 0 14px !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    border-top: 1px solid #ffffff10 !important;
+  }
+  .topbar nav::-webkit-scrollbar { display: none !important; }
+  .topbar nav .nav {
+    flex: 0 0 auto !important;
+    min-width: max-content !important;
+    padding: 0 3px !important;
+    font-size: 12px !important;
+  }
+  .hero {
+    width: 100% !important;
+    height: 500px !important;
+    min-height: 500px !important;
+    max-height: 72dvh !important;
+  }
+  .hero-content { padding: 54px 20px 78px !important; }
+  .hero h1 { font-size: clamp(38px, 11vw, 48px) !important; }
+  .content { width: 100% !important; max-width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; }
+  .row { grid-auto-columns: minmax(0, 42vw) !important; grid-auto-columns: 42vw !important; gap: 12px !important; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 20px 12px !important; }
+  footer { padding-left: 16px !important; padding-right: 16px !important; }
+  .modal {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: stretch !important;
+    overflow: hidden !important;
+  }
+  .modal .panel { max-width: 100vw !important; }
+  .player {
+    width: 100% !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    border-radius: 0 !important;
+    padding: calc(env(safe-area-inset-top, 0px) + 14px) 14px calc(env(safe-area-inset-bottom, 0px) + 14px) !important;
+  }
+  .player-head { padding: 0 48px 12px 2px !important; min-height: 50px !important; }
+  .player-head h2 { font-size: 17px !important; }
+  .player-head .close { top: calc(env(safe-area-inset-top, 0px) + 12px) !important; right: 12px !important; }
+  #provider-toolbar {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    padding: 8px 0 12px !important;
+  }
+  #provider-toolbar label { flex: 0 0 auto !important; font-size: 12px !important; }
+  #provider-toolbar select, #provider-toolbar input, #provider-toolbar button {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    font-size: 13px !important;
+    padding: 9px !important;
+  }
+  #provider-toolbar select { flex: 1 1 150px !important; }
+  #player-stage {
+    width: 100% !important;
+    height: min(56.25vw, 42dvh) !important;
+    min-height: 210px !important;
+    max-height: 42dvh !important;
+    aspect-ratio: 16 / 9 !important;
+    border-radius: 7px !important;
+  }
+  #player-stage iframe, #player-stage video {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+  .player-message { font-size: 11px !important; line-height: 1.5 !important; }
+  .detail { width: 100% !important; height: 100dvh !important; max-height: 100dvh !important; overflow-y: auto !important; border-radius: 0 !important; }
+}
+@media (display-mode: standalone) {
+  html, body { overscroll-behavior-y: none; }
+}
+</style>
+
+</head><body><header class="topbar"><a class="brand brand-image brand-lockup" href="#" aria-label="OnlyFlix — A project by ItsSploited"><img src="./assets/onlyflix-logo.png" alt="OnlyFlix"></a><nav><button class="nav active" data-view="home">Home</button><button class="nav" data-view="movies">Movies</button><button class="nav" data-view="tv">TV Shows</button><button class="nav" data-view="watchlist">My List <small id="list-count">0</small></button></nav><div class="actions"><form id="search-form"><span>⌕</span><input id="search" placeholder="Search titles…" aria-label="Search titles"><button id="clear" type="button" hidden>×</button></form><button id="prefs" class="avatar">OF</button></div></header><main><section class="hero"><div id="hero-image" class="hero-image"></div><div class="hero-shade"></div><div class="hero-content"><div class="eyebrow">✦ &nbsp; YOUR NEXT FAVORITE</div><p class="kicker">ONLYFLIX ORIGINAL DISCOVERY</p><h1 id="hero-title">Find your<br><em>next obsession.</em></h1><p id="hero-desc">Explore movies and series, build your list, and settle in for something great.</p><div id="hero-meta" class="meta"></div><div class="buttons"><button id="hero-play" class="primary">▶ &nbsp; Watch now</button><button id="hero-info" class="secondary">ⓘ &nbsp; More info</button></div></div><div class="hero-bottom">01 <span></span> A WORLD OF STORIES</div></section><div class="content"><div id="status" class="status"><i></i> Connecting to live catalogue…</div><section id="search-section" hidden><div class="section-head"><div><small>FIND YOUR TITLE</small><h2 id="search-heading">Search results</h2></div><label id="search-count"></label></div><div id="search-results" class="grid"></div></section><div id="home-view"><section class="shelf"><div class="section-head"><div><small>PICKED FOR YOU</small><h2>Trending discoveries <b>✦</b></h2></div></div><div id="trending" class="row"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></section><section class="shelf"><div class="section-head"><div><small>FRESHLY ADDED</small><h2>Latest on OnlyFlix</h2></div></div><div id="latest" class="row"></div></section><section class="shelf"><div class="section-head"><div><small>KEEP EXPLORING</small><h2>Series to get lost in</h2></div></div><div id="tv-row" class="row"></div></section></div><section id="catalog-view" hidden><div class="section-head"><div><small>THE COLLECTION</small><h2 id="catalog-title">Movies</h2></div><label id="catalog-count"></label></div><div id="catalog-grid" class="grid"></div><div class="load"><button id="load-more" class="secondary">Load more titles</button></div></section><section id="list-view" hidden><div class="section-head"><div><small>SAVED FOR LATER</small><h2>My List</h2></div></div><div id="list-grid" class="grid"></div><p id="empty-list" class="empty">Your list is waiting. Add titles with the ＋ button on any poster.</p></section></div>
 <div class="site-credit" aria-label="Site credits">OnlyFlix · A project by <strong>ItsSploited</strong></div>
 <style>
 .site-credit{
