@@ -1,9 +1,10 @@
-const CACHE_NAME = "onlyflix-shell-v3";
+const CACHE_NAME = "onlyflix-shell-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
+  "./ios-install-welcome.js",
   "./config.js",
   "./manifest.webmanifest",
   "./assets/onlyflix-logo.png",
