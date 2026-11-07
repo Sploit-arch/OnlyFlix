@@ -3,12 +3,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="OnlyFlix">
-<meta name="application-name" content="OnlyFlix">
+<meta name="application-name" content="OnlyFlix by ItsSploited">
 <meta name="format-detection" content="telephone=no">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon-512.png"><meta name="description" content="OnlyFlix — discover your next movie night."><title>OnlyFlix — Movie Hub</title><link rel="icon" href="./assets/onlyflix-mark.svg"><link rel="stylesheet" href="./styles.css"><style>
+<link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon-512.png"><meta name="description" content="OnlyFlix — discover your next movie night."><title>OnlyFlix by ItsSploited</title><link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="./assets/icons/favicon-48.png"><link rel="stylesheet" href="./styles.css"><style>
 /* Keep the logo at its natural aspect ratio; do not stretch it. */
 .topbar .brand.brand-image.brand-lockup{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:0;width:clamp(145px,17vw,205px);height:76px;flex:0 0 auto;letter-spacing:0;white-space:nowrap;padding:0;overflow:visible;}
 .topbar .brand-image img{display:block;width:100%;height:auto;max-height:70px;object-fit:contain;object-position:left bottom;}
@@ -302,7 +303,71 @@ img, video, iframe { max-width: 100%; }
 @media(prefers-reduced-motion:no-preference){#ios-install-welcome .ios-install-card{animation:iosWelcomeIn .24s ease-out}@keyframes iosWelcomeIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}}
 </style>
 
-</head><body><header class="topbar"><a class="brand brand-image brand-lockup" href="#" aria-label="OnlyFlix — A project by ItsSploited"><img src="./assets/onlyflix-logo.png" alt="OnlyFlix"></a><nav><button class="nav active" data-view="home">Home</button><button class="nav" data-view="movies">Movies</button><button class="nav" data-view="tv">TV Shows</button><button class="nav" data-view="watchlist">My List <small id="list-count">0</small></button></nav><div class="actions"><form id="search-form"><span>⌕</span><input id="search" placeholder="Search titles…" aria-label="Search titles"><button id="clear" type="button" hidden>×</button></form><button id="prefs" class="avatar">OF</button></div></header><main><section class="hero"><div id="hero-image" class="hero-image"></div><div class="hero-shade"></div><div class="hero-content"><div class="eyebrow">✦ &nbsp; YOUR NEXT FAVORITE</div><p class="kicker">ONLYFLIX ORIGINAL DISCOVERY</p><h1 id="hero-title">Find your<br><em>next obsession.</em></h1><p id="hero-desc">Explore movies and series, build your list, and settle in for something great.</p><div id="hero-meta" class="meta"></div><div class="buttons"><button id="hero-play" class="primary">▶ &nbsp; Watch now</button><button id="hero-info" class="secondary">ⓘ &nbsp; More info</button></div></div><div class="hero-bottom">01 <span></span> A WORLD OF STORIES</div></section><div class="content"><div id="status" class="status"><i></i> Connecting to live catalogue…</div><section id="search-section" hidden><div class="section-head"><div><small>FIND YOUR TITLE</small><h2 id="search-heading">Search results</h2></div><label id="search-count"></label></div><div id="search-results" class="grid"></div></section><div id="home-view"><section class="shelf"><div class="section-head"><div><small>PICKED FOR YOU</small><h2>Trending discoveries <b>✦</b></h2></div></div><div id="trending" class="row"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></section><section class="shelf"><div class="section-head"><div><small>FRESHLY ADDED</small><h2>Latest on OnlyFlix</h2></div></div><div id="latest" class="row"></div></section><section class="shelf"><div class="section-head"><div><small>KEEP EXPLORING</small><h2>Series to get lost in</h2></div></div><div id="tv-row" class="row"></div></section></div><section id="catalog-view" hidden><div class="section-head"><div><small>THE COLLECTION</small><h2 id="catalog-title">Movies</h2></div><label id="catalog-count"></label></div><div id="catalog-grid" class="grid"></div><div class="load"><button id="load-more" class="secondary">Load more titles</button></div></section><section id="list-view" hidden><div class="section-head"><div><small>SAVED FOR LATER</small><h2>My List</h2></div></div><div id="list-grid" class="grid"></div><p id="empty-list" class="empty">Your list is waiting. Add titles with the ＋ button on any poster.</p></section></div>
+
+<style id="onlyflix-pkg-page-style">
+.pkg-page{padding:clamp(22px,5vw,64px);min-height:65vh;background:radial-gradient(ellipse at 85% 12%,#4a090e55,transparent 42%),#141414;color:#f5f5f1}
+.pkg-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(250px,.85fr);gap:clamp(22px,5vw,64px);align-items:center;max-width:1180px;margin:0 auto;padding:clamp(25px,5vw,58px) 0 45px}
+.pkg-kicker,.pkg-section-title small{color:#e50914;font-size:10px;font-weight:800;letter-spacing:3px}
+.pkg-copy h1{font-size:clamp(38px,6vw,68px);line-height:1.02;letter-spacing:-2px;margin:14px 0}
+.pkg-copy h1 em{font-style:normal;color:#e50914}
+.pkg-lead{max-width:650px;color:#c7c7c7;font-size:clamp(14px,1.5vw,17px);line-height:1.75}
+.pkg-tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 25px}
+.pkg-tags span{font-size:11px;color:#eee;border:1px solid #ffffff2b;border-radius:99px;padding:8px 12px;background:#ffffff08}
+.pkg-download{border:1px solid #555;background:#303030;color:#aaa;border-radius:5px;padding:14px 20px;font-size:12px;font-weight:800;letter-spacing:1px;cursor:not-allowed;opacity:.85}
+.pkg-download-note{font-size:11px;color:#888;margin-top:10px}
+.pkg-logo-wrap{background:#fff;border-radius:12px;padding:18px;box-shadow:0 18px 60px #0008;border:1px solid #ffffff2b}
+.pkg-logo-wrap img{display:block;width:100%;height:auto;object-fit:contain}
+.pkg-details{max-width:1180px;margin:0 auto;padding:25px 0 10px;border-top:1px solid #ffffff18}
+.pkg-section-title h2{font-size:clamp(24px,3vw,34px);margin:8px 0 25px}
+.pkg-feature-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pkg-feature{padding:20px;background:linear-gradient(145deg,#202020,#171717);border:1px solid #ffffff16;border-radius:8px;min-height:150px}
+.pkg-feature>span{color:#e50914;font-size:11px;font-weight:800;letter-spacing:2px}
+.pkg-feature h3{font-size:16px;margin:13px 0 7px}
+.pkg-feature p{font-size:12px;line-height:1.65;color:#aaa;margin:0}
+.pkg-disclaimer{margin-top:22px;padding:14px 16px;border-left:3px solid #e50914;background:#ffffff08;color:#999;font-size:11px;line-height:1.6}
+@media(max-width:760px){
+ .pkg-page{padding:20px 16px 36px}
+ .pkg-hero{grid-template-columns:1fr;gap:24px;padding:22px 0 30px}
+ .pkg-copy h1{font-size:42px}
+ .pkg-logo-wrap{grid-row:1;padding:12px;max-width:100%;box-sizing:border-box}
+ .pkg-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .pkg-feature{padding:15px;min-height:155px}
+}
+@media(max-width:380px){.pkg-feature-grid{grid-template-columns:1fr}.pkg-feature{min-height:0}}
+</style>
+
+
+<style id="onlyflix-pkg-discord-style">
+.pkg-discord{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:13px;min-height:44px;box-sizing:border-box;padding:12px 19px;border-radius:5px;background:#5865f2;border:1px solid #7180ff;color:#fff!important;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.5px;transition:background .18s ease,transform .18s ease}
+.pkg-discord:hover{background:#4752c4;transform:translateY(-1px)}
+.pkg-discord span{font-size:17px;line-height:1}
+</style>
+
+</head><body><header class="topbar"><a class="brand brand-image brand-lockup" href="#" aria-label="OnlyFlix — A project by ItsSploited"><img src="./assets/onlyflix-logo.png" alt="OnlyFlix"></a><nav><button class="nav active" data-view="home">Home</button><button class="nav" data-view="movies">Movies</button><button class="nav" data-view="tv">TV Shows</button><button class="nav" data-view="pkg">PKG</button><button class="nav" data-view="watchlist">My List <small id="list-count">0</small></button></nav><div class="actions"><form id="search-form"><span>⌕</span><input id="search" placeholder="Search titles…" aria-label="Search titles"><button id="clear" type="button" hidden>×</button></form><button id="prefs" class="avatar">OF</button></div></header><main><section class="hero"><div id="hero-image" class="hero-image"></div><div class="hero-shade"></div><div class="hero-content"><div class="eyebrow">✦ &nbsp; YOUR NEXT FAVORITE</div><p class="kicker">ONLYFLIX ORIGINAL DISCOVERY</p><h1 id="hero-title">Find your<br><em>next obsession.</em></h1><p id="hero-desc">Explore movies and series, build your list, and settle in for something great.</p><div id="hero-meta" class="meta"></div><div class="buttons"><button id="hero-play" class="primary">▶ &nbsp; Watch now</button><button id="hero-info" class="secondary">ⓘ &nbsp; More info</button></div></div><div class="hero-bottom">01 <span></span> A WORLD OF STORIES</div></section><div class="content"><div id="status" class="status"><i></i> Connecting to live catalogue…</div><section id="search-section" hidden><div class="section-head"><div><small>FIND YOUR TITLE</small><h2 id="search-heading">Search results</h2></div><label id="search-count"></label></div><div id="search-results" class="grid"></div></section><div id="home-view"><section class="shelf"><div class="section-head"><div><small>PICKED FOR YOU</small><h2>Trending discoveries <b>✦</b></h2></div></div><div id="trending" class="row"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></section><section class="shelf"><div class="section-head"><div><small>FRESHLY ADDED</small><h2>Latest on OnlyFlix</h2></div></div><div id="latest" class="row"></div></section><section class="shelf"><div class="section-head"><div><small>KEEP EXPLORING</small><h2>Series to get lost in</h2></div></div><div id="tv-row" class="row"></div></section></div><section id="catalog-view" hidden><div class="section-head"><div><small>THE COLLECTION</small><h2 id="catalog-title">Movies</h2></div><label id="catalog-count"></label></div><div id="catalog-grid" class="grid"></div><div class="load"><button id="load-more" class="secondary">Load more titles</button></div></section><section id="list-view" hidden><div class="section-head"><div><small>SAVED FOR LATER</small><h2>My List</h2></div></div><div id="list-grid" class="grid"></div><p id="empty-list" class="empty">Your list is waiting. Add titles with the ＋ button on any poster.</p></section>
+<section id="pkg-view" class="pkg-page" hidden>
+  <div class="pkg-hero">
+    <div class="pkg-copy">
+      <small class="pkg-kicker">ONLYFLIX HOMEBREW • FOR JAILBROKEN PLAYSTATION 4</small>
+      <h1>OnlyFlix <em>for Jailbroken PS4</em></h1>
+      <p class="pkg-lead">A homebrew media hub built specifically for jailbroken PlayStation 4 consoles. Browse movies and TV shows, discover titles, and launch playback from one console-friendly interface.</p>
+      <div class="pkg-tags"><span>Jailbroken PS4</span><span>Movies &amp; TV</span><span>Native PS4 Homebrew</span></div>
+      <button class="pkg-download" type="button" disabled aria-disabled="true">PKG DOWNLOAD — COMING SOON</button>
+      <p class="pkg-download-note">The download link will be added here when the package is ready.</p>
+      <a class="pkg-discord" href="https://discord.gg/8mKcDTUzFg" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◈</span> Join our Discord</a>
+    </div>
+    <div class="pkg-logo-wrap"><img src="./assets/pkg/onlyflix-ps4-logo.png" alt="OnlyFlix app logo"></div>
+  </div>
+  <div class="pkg-details">
+    <div class="pkg-section-title"><small>MADE FOR JAILBROKEN PLAYSTATION 4</small><h2>Your media hub on a jailbroken PS4.</h2></div>
+    <div class="pkg-feature-grid">
+      <article class="pkg-feature"><span>01</span><h3>Discover</h3><p>Explore a catalogue of movies and series, with artwork and title information in a dedicated interface for jailbroken PS4 consoles.</p></article>
+      <article class="pkg-feature"><span>02</span><h3>Search</h3><p>Find titles and browse movie or TV listings without needing to leave the app.</p></article>
+      <article class="pkg-feature"><span>03</span><h3>Playback choices</h3><p>Choose from the playback sources available in the app, with TV season and episode selection where supported.</p></article>
+      <article class="pkg-feature"><span>04</span><h3>Built for PS4</h3><p>A native homebrew application with a controller-friendly interface designed for jailbroken PlayStation 4 consoles.</p></article>
+    </div>
+    <div class="pkg-disclaimer">OnlyFlix is an independent homebrew project and is not affiliated with or endorsed by Sony. Playback availability depends on the selected provider and the content source.</div>
+  </div>
+</section></div>
 <div class="site-credit" aria-label="Site credits">OnlyFlix · A project by <strong>ItsSploited</strong></div>
 <style>
 .site-credit{

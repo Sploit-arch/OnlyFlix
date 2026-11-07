@@ -1,6 +1,6 @@
 {
   "id": "./",
-  "name": "OnlyFlix \u2014 Movie Hub",
+  "name": "OnlyFlix by ItsSploited",
   "short_name": "OnlyFlix",
   "description": "Discover movies and series with OnlyFlix.",
   "lang": "en",
@@ -44,4 +44,4 @@
       "purpose": "any"
     }
   ]
-}
+}\n

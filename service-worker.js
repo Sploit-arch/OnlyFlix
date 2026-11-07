@@ -1,4 +1,4 @@
-const CACHE_NAME = "onlyflix-shell-v5";
+const CACHE_NAME = "onlyflix-shell-v8";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -8,9 +8,12 @@ const APP_SHELL = [
   "./config.js",
   "./manifest.webmanifest",
   "./assets/onlyflix-logo.png",
+  "./assets/pkg/onlyflix-ps4-logo.png",
   "./assets/onlyflix-mark.svg",
   "./assets/poster-placeholder.svg",
   "./assets/icons/icon-192.png",
+  "./assets/icons/favicon-48.png",
+  "./assets/icons/favicon-32.png",
   "./assets/icons/icon-512.png",
   "./assets/icons/apple-touch-icon.png"
 ];
